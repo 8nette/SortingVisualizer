@@ -1,0 +1,110 @@
+﻿@model int[]
+
+@{
+    ViewData["Title"] = "Sorting Visualizer";
+}
+
+<div class="array">
+    <div class="arraycontainer" id="divs">
+        @foreach (int bar in Model)
+        {
+            <div class="bar" style="width: @(bar + "%")">
+            </div>
+        }
+    </div>
+</div>
+
+<div class="info heapsort">
+    <h1>SORTING VISUALIZER</h1>
+
+    <a asp-controller="Home" asp-action="Index">Merge Sort</a>
+    <a asp-controller="Home" asp-action="QuickSort">Quick Sort</a>
+    <a asp-controller="Home" asp-action="HeapSort" class="active">Heap Sort</a>
+    <a asp-controller="Home" asp-action="BubbleSort">Bubble Sort</a>
+
+    <table>
+        <tr>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+        </tr>
+        <tr>
+            <td>
+                O(n*log(n))
+            </td>
+            <td>O(log(n))</td>
+        </tr>
+    </table>
+
+    <a asp-controller="Home" asp-action="HeapSortResetArray" class="reset">Reset Array</a>
+    <a onclick="heapSort()" class="sort">Sort</a>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        const time = 50;
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function heapSort() {
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetJsonHeapSortSwapArray",
+                dataType: "json",
+                success: function (response) {
+                    var swapArray = response.map(function (item) {
+                        return [item.swap1, item.swap2];
+                    });
+
+                    var interval = 0; 
+
+                    swapArray.forEach(function (item, index) {
+                        var divs = document.getElementById('divs');
+                        var divsChildren = divs.children;
+
+                        var div1 = divsChildren.item(item[0]);
+                        var div2 = divsChildren.item(item[1]);
+
+                        swap(div1, div2, interval);
+
+                        interval = interval + 3;
+                    });
+                }
+            });
+        }
+
+        function swap(div1, div2, interval) {
+
+            delay(interval * time).then(() =>
+                turnRed(div1, div2)
+            );
+
+            delay((interval + 1) * time).then(() =>
+                swapWidths(div1, div2)
+            );
+
+            delay((interval + 2) * time).then(() =>
+                turnBlue(div1, div2)
+            );
+        }
+
+        function turnRed (div1, div2) {
+            div1.style.background = '#f54245';
+            div2.style.background = '#f54245';
+        }
+
+        function swapWidths (div1, div2) {
+            var div1Width = div1.style.width;
+            var div2Width = div2.style.width;
+
+            div1.style.width = div2Width;
+            div2.style.width = div1Width;
+        }
+
+        function turnBlue(div1, div2) {
+            div1.style.background = '#074a63';
+            div2.style.background = '#074a63';
+        }
+    </script>
+}

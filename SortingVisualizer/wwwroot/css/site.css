@@ -1,0 +1,108 @@
+﻿:root {
+    --blue: #70c6e6;
+    --dark-blue: #074a63;
+    --grey: #a1b7bf;
+    --dark-grey: #5e6b70;
+    --black: #282e30;
+    --light-grey: #bad3db;
+    --red: #f54245;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  all: unset;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+    all: unset;
+    margin: 0;
+    padding: 0;
+}
+
+main .array {
+    width: 60%;
+    float: left;
+    min-height: 100vh;
+}
+
+main .info {
+    width: 40%;
+    padding: 4em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--dark-blue);
+    color: white;
+    min-height: 100vh;
+    float: right;
+    font-weight: lighter;
+}
+
+main .info h1 {
+    text-align: center;
+    margin: 2em 0;
+    font-weight: lighter !important;
+}
+
+main .info a {
+    color: var(--blue);
+    text-decoration: none;
+    padding: 0.5em;
+    border: 2px solid var(--blue);
+    display: inline-block;
+    border-radius: 10px;
+    margin: 0 0 1em 0;
+}
+
+main .info a:hover {
+    background-color: var(--blue);
+    color: var(--dark-blue);
+}
+
+main .info a.active {
+    background-color: var(--blue);
+    color: var(--dark-blue);
+}
+
+main .info a.sort {
+    display: block;
+    width: fit-content;
+    text-align: center;
+    margin: 0em auto;
+    color: var(--blue);
+}
+
+main .info a.reset {
+    display: block;
+    width: fit-content;
+    text-align: center;
+    margin: 0 auto 2em auto;
+}
+
+main .info table {
+    text-align: center;
+    margin: 2em 0;
+}
+
+main .info table tr th {
+    font-weight: normal !important;
+}
+
+main .info table tr td {
+    padding: 0 4em;
+}
+
+main .array .arraycontainer {
+    width: 100%;
+    height: 90vh;
+    margin: 5vh 0 0 0;
+}
+
+main .array .bar {
+    background-color: var(--dark-blue);
+    height: 2px;
+    margin: 4.4px 0 0 0;
+    display: block;
+    clear: left;
+}
